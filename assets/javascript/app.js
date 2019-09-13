@@ -69,16 +69,37 @@ function displayQuestions() {
     var question = triviaQuestions[currentQuestion].question; // get current question
     var answers = triviaQuestions[currentQuestion].answers; // get answer options
 
+    $("#time").html("Timer: " + counter); // display timer on html
+    $("#game").html(`
+        <h4>${question}<h4> 
+    ${displayAnswers(answers)}
+    `);
 }
 
+// display answers on page for loop
 
-var choices = triviaQuestions[currentQuestion].choices; 
+function displayAnswers(answers) {
+    var result = "";
+// loop through answer array replace result in p tags 
+    for (let i = 0; i < answers.length; i++) {
+        result += `<p class="answer" data-answer="${answers[i]}">${answers[i]}</p>`;
+        
+    }
+
+    return result;
+}
+
+displayQuestions();
+
+
+
+
 
 // start on click
 
-var start = $("#start-btn").on('click', function() {
+// var start = $("#start-btn").on('click', function() {
 
 
-}
+// }
 
 // trivia question display
