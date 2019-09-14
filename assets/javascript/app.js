@@ -53,7 +53,7 @@ var triviaQuestions = [
 
 // GLOBAL VARIABLES
 
-var counter = 30; // timer that's going to count down 
+var counter = 5; // timer that's going to count down 
 var currentQuestion = 0; // pull first question from the array
 var score = 0; // count correct answers
 var incorrect = 0; // count incorrect answers
@@ -62,14 +62,40 @@ var timer; // set interval gives ability to clear or reset counter
 
 // FUNCTIONS
 
-// display trivia questions on page
+// Replace current question with next question once answer has been selected
 
+function nextQuestion() {
+    currentQuestion++;
+}
+
+// function to clear timer clearInterval method clear timer set with seInterval + add incorrect count
+
+function timeUp() {
+    clearInterval(timer);
+
+    incorrect++;
+}
+// initialize timer count down 
+
+function countDown() {
+    counter--;
+
+    $("#time").html("Timer: " + counter);
+
+    if (counter === 0) {
+        timeUp();
+    }
+}
+
+// display trivia questions
 function displayQuestions() {
-
+    counter = 5;
+    timer = setInterval(countDown, 1000);
+    
     var question = triviaQuestions[currentQuestion].question; // get current question
     var answers = triviaQuestions[currentQuestion].answers; // get answer options
 
-    $("#time").html("Timer: " + counter); // display timer on html
+    $("#time").html("Timer: " + counter); // display timer on browser
     $("#game").html(`
         <h4>${question}<h4> 
     ${displayAnswers(answers)}
@@ -80,7 +106,7 @@ function displayQuestions() {
 
 function displayAnswers(answers) {
     var result = "";
-// loop through answer array replace result in p tags 
+// loop through answer array 
     for (let i = 0; i < answers.length; i++) {
         result += `<p class="answer" data-answer="${answers[i]}">${answers[i]}</p>`;
         
