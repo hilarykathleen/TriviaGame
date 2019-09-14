@@ -65,7 +65,14 @@ var timer; // set interval gives ability to clear or reset counter
 // Replace current question with next question once answer has been selected
 
 function nextQuestion() {
-    currentQuestion++;
+    var questionTimesUp = (triviaQuestions.length - 1) === currentQuestion; // stops displaying questions once cycle is complete all questions have been displayed
+    if (questionTimesUp) {
+    console.log("game over");
+    } else {
+        currentQuestion++; 
+        displayQuestions(); 
+
+    }
 }
 
 // function to clear timer clearInterval method clear timer set with seInterval + add incorrect count
@@ -74,6 +81,8 @@ function timeUp() {
     clearInterval(timer);
 
     incorrect++;
+
+    nextQuestion();
 }
 // initialize timer count down 
 
@@ -88,12 +97,13 @@ function countDown() {
 }
 
 // display trivia questions
+
 function displayQuestions() {
     counter = 5;
     timer = setInterval(countDown, 1000);
     
-    var question = triviaQuestions[currentQuestion].question; // get current question
-    var answers = triviaQuestions[currentQuestion].answers; // get answer options
+    var question = triviaQuestions[currentQuestion].question; // retrieve current question
+    var answers = triviaQuestions[currentQuestion].answers; // retrieve answer options
 
     $("#time").html("Timer: " + counter); // display timer on browser
     $("#game").html(`
@@ -115,17 +125,13 @@ function displayAnswers(answers) {
     return result;
 }
 
+// on click function to select answer to question
+
+$(document).on('click', ".answer", function() {
+    console.log("onclick");
+
+    var userAnswer = $(this).attr("data-answer");
+});
+
 displayQuestions();
 
-
-
-
-
-// start on click
-
-// var start = $("#start-btn").on('click', function() {
-
-
-// }
-
-// trivia question display
