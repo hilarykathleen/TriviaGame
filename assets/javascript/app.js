@@ -152,28 +152,41 @@ $(document).on('click', ".answer", function() {
 
 // function to display results at the end of game
 
-function displayFinalScore () {
-    var finalScore = `
-    <p>Correct Answers: ${score}</p>
-    <p>Incorrect Answers: ${incorrect}</p>
-    <button class="btn btn-primary id="reset">New Game</button>
-    `
 
-    $("#game").html(finalScore);
+function displayFinalScore() {
+    var finalScore = `
+        <p>Correct Answers: ${score} </p>
+        <p>Incorrect Answers: ${incorrect} </p>
+        
+        <button class="btn btn-primary" id="reset">Reset Game</button>
+    `;
+
+    $('#game').html(finalScore);
 }
 
-// finally resettt buttonnnnnnnnahhhhhhhhhh so happy
+// function for reset button to refresh first question for new game reset
+$(document).on('click', '#reset', function() {
+    
+    counter = 5;
+    currentQuestion = 0;
+    score = 0;
+    incorrect = 0;
+    timer = null;
 
-$(document).on('click', "#reset", function() {
-    console.log("testing");
-    // var counter = 5; 
-    // var currentQuestion = 0; 
-    // var score = 0; 
-    // var incorrect = 0; 
-    // var timer; 
+    displayQuestions();
 
-
+    
 });
 
-displayQuestions();
+$("#start").click(function() {
+    $("#start").remove();
+    $("#time").html(counter);
+    displayQuestions();
+    
+});
+
+
+
+
+
 
