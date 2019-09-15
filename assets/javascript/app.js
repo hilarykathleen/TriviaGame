@@ -53,7 +53,7 @@ var triviaQuestions = [
 
 // GLOBAL VARIABLES
 
-var counter = 30; // timer that's going to count down 
+var counter = 10; // timer that's going to count down 
 var currentQuestion = 0; // pull first question from the array
 var score = 0; // count correct answers
 var incorrect = 0; // count incorrect answers
@@ -101,7 +101,7 @@ function countDown() {
 // display trivia questions
 
 function displayQuestions() {
-    counter = 30;
+    counter = 10;
     timer = setInterval(countDown, 1000);
     
     var question = triviaQuestions[currentQuestion].question; // retrieve current question
@@ -188,13 +188,13 @@ $("#start").click(function() {
 });
 
 
-//Yet to be complete for advanced option:
+//Yet to be completed for advanced option:
 // If the player selects the correct answer, show a screen congratulating them for choosing the right option. After a few seconds, display the next question -- do this without user input.
 
 // If the player runs out of time, tell the player that time's up and display the correct answer. Wait a few seconds, then show the next question.
 //   * If the player chooses the wrong answer, tell the player they selected the wrong option and then display the correct answer. Wait a few seconds, then show the next question.
 
-
+//if else statement for function to display congrats or bummer display
 
 
 
