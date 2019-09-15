@@ -68,6 +68,7 @@ function nextQuestion() {
     var questionTimesUp = (triviaQuestions.length - 1) === currentQuestion; // stops displaying questions once cycle is complete all questions have been displayed
     if (questionTimesUp) {
     console.log("game over");
+    displayFinalScore();
     } else {
         currentQuestion++; 
         displayQuestions(); 
@@ -84,6 +85,7 @@ function timeUp() {
 
     nextQuestion();
 }
+
 // initialize timer count down 
 
 function countDown() {
@@ -125,12 +127,52 @@ function displayAnswers(answers) {
     return result;
 }
 
-// on click function to select answer to question
+// on click function to select answer to question 
 
 $(document).on('click', ".answer", function() {
-    console.log("onclick");
+    clearInterval(timer); // clear timer after answer has been selecter and next question appears
+    var userAnswer = $(this).attr("data-answer"); // 'this' represents elements clicked, attribuet to go inside element and get the value of the data answer
+    var correctAnswer = triviaQuestions[currentQuestion].correctAnswer; // compare correct answer with the user answer
+    // if else statement to increase score if answer equals user answer increase incorrect else guess is not equal to (false)
 
-    var userAnswer = $(this).attr("data-answer");
+    if (correctAnswer === userAnswer) {
+
+        score++;
+        console.log("increasescore");
+        nextQuestion(); 
+    } else {
+
+        incorrect++;
+        console.log("increaseincorrect");
+        nextQuestion();
+    }
+    
+    console.log(correctAnswer);
+});
+
+// function to display results at the end of game
+
+function displayFinalScore () {
+    var finalScore = `
+    <p>Correct Answers: ${score}</p>
+    <p>Incorrect Answers: ${incorrect}</p>
+    <button class="btn btn-primary id="reset">New Game</button>
+    `
+
+    $("#game").html(finalScore);
+}
+
+// finally resettt buttonnnnnnnnahhhhhhhhhh so happy
+
+$(document).on('click', "#reset", function() {
+    console.log("testing");
+    // var counter = 5; 
+    // var currentQuestion = 0; 
+    // var score = 0; 
+    // var incorrect = 0; 
+    // var timer; 
+
+
 });
 
 displayQuestions();
